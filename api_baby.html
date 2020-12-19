@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      .dd{margin-top: 70px}
+    </style>
+</head>
+<body style="background: red">
+  <h1 CLASS="text-center">CHECK FOR FORBES BILLIONAIRES HERE </h1>  
+  <form class="dd">
+        <label>ENTER BILLIONAIRS NAME</label>
+        <input  class="form-control"type="text" required  name="user" id="finder"/>
+    </form>
+    <button class="btn btn-success btn-lg" id="sub">SUMBIT</button>
+    <button class="btn btn btn-danger btn-lg"><a>RESET></a></button>
+     <table class="col-md-12 table table-bordered" style="background: white">
+         <thead>
+             <tr>
+                 <th>NAME</th>
+                 <th>RANK</th>
+                 <th>NET-WORTH($)</th>
+                 <th>PICTURE</th>
+                 <th>COMPANY</th>
+             </tr>
+         </thead>
+         <tbody id="tbo">
+         </tbody>
+     </table>
+    <script>
+        const url = "https://forbes400.herokuapp.com/api/forbes400?limit=10";
+        const urlyonger = "https://forbes400.herokuapp.com/api/forbes400/youngest";
+        const allurl = "https://forbes400.herokuapp.com/api/forbes400/getAllBillionaires";
+        document.getElementById('sub').addEventListener("click",dre)
+        document.getElementById('sub').addEventListener("keypress",dre)
+        function dre(e) {
+          e.preventDefault()
+          let what = document.getElementById("finder").value
+
+          if(what == "forbes") { fetch(url).then(response => response.json()).then((data) => {
+            let name = '<h1></h1>';
+           
+           
+            data.forEach((details) => {
+              name += `<tr><th>${details.uri}</th>
+                       <th>${details.rank}</th>
+                       <th>${details.finalWorth}</th>
+                       <th class="text-center"><img src=${details.person.squareImage} alt="pictures class="img-responsive image-rounded"/></th>
+                       <th>${details.source}</th>
+                       </tr><br>`;
+              
+        })
+            
+
+        document.getElementById("tbo").innerHTML = name;
+           
+           
+
+
+            })
+          } else if (what == "jeff bezos") {
+            fetch(url).then(response => response.json()).then(data => {
+              var t = "";
+              const p = data.filter(p => p.uri === "jeff-bezos")
+            
+            })
+          }
+          
+        }
+    </script>
+</body>
+</html>
